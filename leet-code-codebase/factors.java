@@ -1,5 +1,5 @@
 import java.util.*;
-public class Factors {
+public class factors {
     public static void main(String[] args) {
         Scanner sc=new Scanner(System.in);
         int input=sc.nextInt();
