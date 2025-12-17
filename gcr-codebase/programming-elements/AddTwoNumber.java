@@ -8,6 +8,7 @@ public class AddTwoNumber {
         int a=sc.nextInt();
         int b=sc.nextInt();
         int c=a+b;
-        System.out.println(c);
+        System.out.println("Sum: " + c);
+        sc.close();
     }
 }
