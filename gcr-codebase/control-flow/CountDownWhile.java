@@ -9,5 +9,7 @@ public class CountDownWhile {
             System.out.println(counter);
             counter--;
         }
+
+        sc.close();
     }
 }
