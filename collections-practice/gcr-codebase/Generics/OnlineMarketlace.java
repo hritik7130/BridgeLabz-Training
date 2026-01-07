@@ -53,7 +53,7 @@ class DiscountUtil {
     }
 }
 
-public class OnlineMarketplace {
+public class OnlineMarketlace {
 
     public static void main(String[] args) {
 
