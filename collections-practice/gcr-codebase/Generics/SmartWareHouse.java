@@ -75,7 +75,7 @@ class WarehouseUtil {
 }
 
 
-public class SmartWarehouse {
+public class SmartWareHouse {
 
     public static void main(String[] args) {
 
