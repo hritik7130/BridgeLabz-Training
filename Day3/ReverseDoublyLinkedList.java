@@ -6,7 +6,7 @@ import java.util.*;
 class DoublyLinkedListNode {
     int data;
     DoublyLinkedListNode next;
-    DoublyLinkedListNode prev;
+    DoublyLinkedListNode prev ;
 
     DoublyLinkedListNode(int data) {
         this.data = data;
