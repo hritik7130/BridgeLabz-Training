@@ -2,7 +2,7 @@ package WeekyHackerRankChallenge;
 
 import java.util.*;
 
-public class Fibonacci {
+public class FibonacciSeries {
 
     public static int fibonacci(int n) {
                
