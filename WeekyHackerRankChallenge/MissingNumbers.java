@@ -1,5 +1,3 @@
-package WeekyHackerRankChallenge;
-
 import java.io.*;
 import java.math.*;
 import java.security.*;
@@ -11,48 +9,44 @@ import java.util.regex.*;
 class Result {
 
     /*
-     * Complete the 'sherlockAndAnagrams' function below.
+     * Complete the 'missingNumbers' function below.
      *
-     * The function is expected to return an INTEGER.
-     * The function accepts STRING s as parameter.
+     * The function is expected to return an INTEGER_ARRAY.
+     * The function accepts following parameters:
+     *  1. INTEGER_ARRAY arr
+     *  2. INTEGER_ARRAY brr
      */
 
-    public static int sherlockAndAnagrams(String s) {
+    public static List<Integer> missingNumbers(List<Integer> arr, List<Integer> brr) {
     // Write your code here
-    int count = 0;
+     Map<Integer, Integer> map = new HashMap<Integer, Integer>();
 
-    for (int i = 0; i < s.length(); i++) {
-
-        for (int j = i + 1; j < s.length(); j++) {
-
-            int[] freq1 = new int[26];
-
-            for (int k = i; k < j; k++) {
-                freq1[s.charAt(k) - 'a']++;
-            }
-
-            for (int k = i + 1; k < s.length(); k++) {
-
-                int length = j - i;
-
-                if (k + length > s.length()) {
-                    break;
-                }
-
-                int[] freq2 = new int[26];
-
-                for (int l = k; l < k + length; l++) {
-                    freq2[s.charAt(l) - 'a']++;
-                }
-
-                if (Arrays.equals(freq1, freq2)) {
-                    count++;
-                }
-            }
+    // Count frequency in brr
+    for (int num : brr) {
+        if (map.containsKey(num)) {
+            map.put(num, map.get(num) + 1);
+        } else {
+            map.put(num, 1);
         }
     }
 
-    return count;
+    // Remove frequencies found in arr
+    for (int num : arr) {
+        map.put(num, map.get(num) - 1);
+    }
+
+    List<Integer> result = new ArrayList<Integer>();
+
+    // Numbers whose frequency is still greater than 0
+    for (int num : map.keySet()) {
+        if (map.get(num) > 0) {
+            result.add(num);
+        }
+    }
+
+    Collections.sort(result);
+
+    return result;
 
     }
 
@@ -63,19 +57,41 @@ public class MissingNumbers {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
 
-        int q = Integer.parseInt(bufferedReader.readLine().trim());
+        int n = Integer.parseInt(bufferedReader.readLine().trim());
 
-        for (int qItr = 0; qItr < q; qItr++) {
-            String s = bufferedReader.readLine();
+        String[] arrTemp = bufferedReader.readLine().replaceAll("\\s+$", "").split(" ");
 
-            int result = Result.sherlockAndAnagrams(s);
+        List<Integer> arr = new ArrayList<>();
 
-            bufferedWriter.write(String.valueOf(result));
-            bufferedWriter.newLine();
+        for (int i = 0; i < n; i++) {
+            int arrItem = Integer.parseInt(arrTemp[i]);
+            arr.add(arrItem);
         }
+
+        int m = Integer.parseInt(bufferedReader.readLine().trim());
+
+        String[] brrTemp = bufferedReader.readLine().replaceAll("\\s+$", "").split(" ");
+
+        List<Integer> brr = new ArrayList<>();
+
+        for (int i = 0; i < m; i++) {
+            int brrItem = Integer.parseInt(brrTemp[i]);
+            brr.add(brrItem);
+        }
+
+        List<Integer> result = Result.missingNumbers(arr, brr);
+
+        for (int i = 0; i < result.size(); i++) {
+            bufferedWriter.write(String.valueOf(result.get(i)));
+
+            if (i != result.size() - 1) {
+                bufferedWriter.write(" ");
+            }
+        }
+
+        bufferedWriter.newLine();
 
         bufferedReader.close();
         bufferedWriter.close();
     }
 }
-
